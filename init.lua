@@ -1,6 +1,10 @@
 -- Modular Enet Comunication and Replication Architecture
 -- MECRA
 
+-- MECRA
+-- init.lua
+-- by: MB 2026
+
 math.randomseed(os.time())
 
 local _M = {}

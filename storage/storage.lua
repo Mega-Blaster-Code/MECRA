@@ -1,8 +1,5 @@
 -- storage.lua
 -- by: MB 2026
--- from "mew v0.1"
--- require ltab.lua or tab.dll
--- remaking of mesma(deprecated)
 
 
 --[[

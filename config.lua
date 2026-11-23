@@ -1,3 +1,7 @@
+-- CONFIG
+-- config.lua
+-- by: MB 2026
+
 local _M = {}
 
 local defaults_config = {

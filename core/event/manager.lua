@@ -1,4 +1,7 @@
+-- EVENT
 -- manager.lua
+-- by: MB 2026
+
 local mecra = require("mecra")
 
 local _M = {}

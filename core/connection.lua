@@ -1,4 +1,7 @@
+-- CORE
 -- connection.lua
+-- by: MB 2026
+
 -- The connection is an abstraction of an ENet peer.
 -- It hides the peer and exposes certain functions to the SOC (server or client).
 local mecra = require("mecra")

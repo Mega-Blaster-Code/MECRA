@@ -1,3 +1,7 @@
+-- EVENT
+-- serverSide.lua
+-- by: MB 2026
+
 local enet = require("enet")
 
 local mecra = require("mecra")

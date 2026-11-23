@@ -1,3 +1,7 @@
+-- ROUTER
+-- router.lua
+-- by: MB 2026
+
 local _M = {}
 
 _G.package.loaded[...] = _M

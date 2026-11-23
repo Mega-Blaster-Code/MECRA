@@ -1,3 +1,7 @@
+-- TRANSPORT
+-- serialize.lua
+-- by: MB 2026
+
 local _M = {}
 
 local mecra = require("mecra")
