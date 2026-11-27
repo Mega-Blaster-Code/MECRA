@@ -45,14 +45,17 @@ function _M.new(ip, port, name, password)
     self.payloadConfig = {}
 
     -- default config of each client
-    self.clientConfig = {}
+    self.clientStorage = {
+		storage = {},
+		record = false,
+	}
 
     self.clientsByIndex = {}
 	self.clientsById = {}
 
     self.globalStorage = storage.new()
 
-    self.manager = manager.new()
+    self.manager = manager.new(self)
     self.manager.callbacks.connect = function(self, client)
 		print("server: connect", client)
     end
@@ -71,9 +74,10 @@ function server:getConnectionCount()
 end
 
 -- set the default local storage for each client
-function server:setClientConfig(opts)
+function server:setClientStorage(opts, record)
+	self.clientStorage.record = record
     for name, storOpts in pairs(opts) do
-        self.clientConfig[name] = storOpts
+        self.clientStorage.storage[name] = storOpts
     end
 end
 
@@ -148,8 +152,8 @@ function server:newClient(peer)
     }
 
     -- sets up the client local storage
-    client.storage = storage.new()
-    for key, opts in pairs(self.clientConfig) do
+    client.storage = storage.new(self.clientStorage.record)
+    for key, opts in pairs(self.clientStorage.storage) do
         client.storage:store(key, opts.value, opts)
     end
 
@@ -204,7 +208,7 @@ function server:update(dt)
 		client.state = conn:getState()
 	end
 
-    local sucess, err = self.manager:service(self)
+    local sucess, err = self.manager:service()
     if err then
         print("ERROR SERVICE", err)
     end
@@ -213,6 +217,10 @@ function server:update(dt)
             print("ERROR SERVICE", inspect(self.manager:popError()))
         end
     end
+end
+
+function server:close(client)
+	client.connection:close()
 end
 
 return _M

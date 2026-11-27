@@ -7,9 +7,13 @@
 
 math.randomseed(os.time())
 
-local _M = {}
-
 local path = ...
+
+local _M = {
+	_VERSION = "0.5",
+	_LICENSE = require(path .. ".license")
+}
+
 _G.package.loaded[path] = _M
 _M.path = path
 
@@ -60,21 +64,25 @@ _M._cur_path = path .. ".core.event"
 _M.core.event = {}
 _M.core.event.serverSide = require(_M._cur_path .. ".serverSide")
 _M.core.event.clientSide = require(_M._cur_path .. ".clientSide")
+
+_M.core.event.attach = {}
+_M._cur_path = path .. ".core.event.attach"
+_M.core.event.attach = require(_M._cur_path .. ".attach")
+_M._cur_path = path .. ".core.event"
+
 _M.core.event.manager = require(_M._cur_path .. ".manager")
+
 
 -- === storage
 _M._cur_path = path .. ".storage"
 
 _M.storage = {}
+_M.storage.recorder = require(_M._cur_path .. ".recorder")
 _M.storage.storage = require(_M._cur_path .. ".storage")
+--_M.storage.snapshot = require(_M._cur_path .. ".snapshot")
 
 -- === replication
 _M._cur_path = path .. ".replication"
-
---_M.storage = {}
---_M.storage.storage = require(_M._cur_path .. ".storage")
---_M.storage.snapshot = require(_M._cur_path .. ".snapshot")
---_M.storage.changes = require(_M._cur_path .. ".changes")
 
 -- === services
 _M._cur_path = path .. ".services"

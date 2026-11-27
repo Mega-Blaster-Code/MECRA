@@ -56,9 +56,10 @@ local function receive(self, manager, client, rawdata, channel)
     end
 
     local _type, data = info.type, info.data
-
-    local payloadInfo = router.getRouterInfoByType(self, _type)
-    payloadInfo.callback(self, client, data)
+    local sucess, err = router.dispatch(self, _type, client, data)
+	if not sucess then
+		return false, err
+	end
 
     return true, nil
 end

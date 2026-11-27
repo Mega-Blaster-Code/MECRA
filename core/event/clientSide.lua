@@ -23,6 +23,7 @@ local function connect(self, manager, peer, rawdata)
 	local server = self.server
 
 	manager:call("connect", self, server)
+	
     return true, nil
 end
 

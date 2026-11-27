@@ -51,7 +51,7 @@ function _M.new(ip, port, name)
         connected = false
     }
 
-    self.manager = manager.new()
+    self.manager = manager.new(self)
     self.manager.callbacks.connect = function(self, server)
         print("client: connect", server)
     end
@@ -168,7 +168,7 @@ function client:update(dt)
         self.server.state = conn:getState()
     end
 
-    local sucess, err = self.manager:service(self)
+    local sucess, err = self.manager:service()
     if err then
         print("ERROR SERVICE", err)
     end
